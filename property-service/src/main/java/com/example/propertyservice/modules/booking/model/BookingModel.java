@@ -2,6 +2,7 @@ package com.example.propertyservice.modules.booking.model;
 
 import com.example.propertyservice.modules.property.model.PropertyModel;
 import com.example.propertyservice.modules.renter.model.RenterModel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,8 +27,10 @@ public class BookingModel {
     private float totalCost;
 
     @ManyToOne
+    @JsonIgnore
     private RenterModel renter;
 
     @ManyToOne
+    @JsonIgnore
     private PropertyModel property;
 }

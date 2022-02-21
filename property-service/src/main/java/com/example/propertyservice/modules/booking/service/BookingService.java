@@ -58,6 +58,9 @@ public class BookingService {
             }
         }
 
+        newBooking.setProperty(property.get());
+        newBooking.setRenter(renter.get());
+
         bookingRepo.save(newBooking);
         return new GenericResponse(true, "Booking inserted", 00, null);
     }

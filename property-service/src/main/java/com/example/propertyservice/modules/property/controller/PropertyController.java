@@ -22,12 +22,12 @@ public class PropertyController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<GenericResponse> getPropertyById(@RequestParam Long id) {
+    public ResponseEntity<GenericResponse> getPropertyById(@PathVariable Long id) {
         return ResponseEntity.ok(service.getPropertyById(id));
     }
 
     @PostMapping("/{id}")
-    public ResponseEntity<GenericResponse> insertProperty(@RequestParam long id, @RequestBody PropertyModel newProperty) {
+    public ResponseEntity<GenericResponse> insertProperty(@PathVariable long id, @RequestBody PropertyModel newProperty) {
         return ResponseEntity.ok(service.insertProperty(id, newProperty));
     }
 

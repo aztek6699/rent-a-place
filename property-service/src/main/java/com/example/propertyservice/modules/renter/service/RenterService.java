@@ -50,7 +50,7 @@ public class RenterService {
 
         if (renter.isEmpty()) {
             repo.save(newRenter);
-            return new GenericResponse(true, "Renter saved", 00, null);
+            return new GenericResponse(true, "Renter added", 00, null);
         } else {
             return new GenericResponse(false, "Email or/and mobile number must be unique", 01, null);
         }
