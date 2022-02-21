@@ -1,9 +1,6 @@
-package com.example.propertyservice.modules.property.model;
+package com.example.userservice.model;
 
-import com.example.propertyservice.modules.booking.model.BookingModel;
-import com.example.propertyservice.modules.location.model.LocationModel;
-import com.example.propertyservice.modules.propertyowner.model.PropertyOwnerModel;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.example.userservice.propertyowner.model.PropertyOwnerModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +8,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Time;
-import java.util.List;
 
 @Entity
 @Table(name = "property")
@@ -24,15 +20,13 @@ public class PropertyModel {
     @Id
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="property_owner_id", referencedColumnName = "id")
     private PropertyOwnerModel propertyOwner;
 
     @OneToOne
     @JoinColumn(name = "location_id")
     private LocationModel location;
-
-    @OneToMany(mappedBy = "property")
-    private List<BookingModel> bookings;
 
     private String amenities;
     private String description;

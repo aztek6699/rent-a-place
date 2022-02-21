@@ -64,4 +64,8 @@ public class LocationService {
             return new GenericResponse(false, "Locations by country not found", 01, null);
         }
     }
+
+    public Boolean checkIfAddressExist(String address) {
+        return repo.findLocationByAddress(address).isPresent();
+    }
 }

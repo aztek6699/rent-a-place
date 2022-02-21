@@ -1,7 +1,5 @@
-package com.example.propertyservice.modules.location.model;
+package com.example.userservice.model;
 
-import com.example.propertyservice.modules.property.model.PropertyModel;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +20,6 @@ public class LocationModel {
 
     @OneToOne
     @JoinColumn(name = "property_id")
-    @JsonIgnore
     private PropertyModel property;
 
     @Column(unique = true)

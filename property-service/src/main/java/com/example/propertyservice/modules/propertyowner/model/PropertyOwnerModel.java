@@ -1,9 +1,7 @@
-package com.example.userservice.propertyowner.model;
+package com.example.propertyservice.modules.propertyowner.model;
 
-import com.example.userservice.model.PropertyModel;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.example.propertyservice.modules.property.model.PropertyModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,5 +32,6 @@ public class PropertyOwnerModel {
     private Date dob;
 
     @OneToMany(mappedBy = "propertyOwner")
+    @JsonIgnore
     private List<PropertyModel> properties;
 }

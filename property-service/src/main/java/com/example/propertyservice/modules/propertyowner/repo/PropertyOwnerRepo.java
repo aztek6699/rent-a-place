@@ -1,6 +1,6 @@
-package com.example.userservice.propertyowner.repo;
+package com.example.propertyservice.modules.propertyowner.repo;
 
-import com.example.userservice.propertyowner.model.PropertyOwnerModel;
+import com.example.propertyservice.modules.propertyowner.model.PropertyOwnerModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

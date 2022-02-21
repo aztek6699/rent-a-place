@@ -1,8 +1,8 @@
-package com.example.userservice.propertyowner.service;
+package com.example.propertyservice.modules.propertyowner.service;
 
-import com.example.userservice.model.GenericResponse;
-import com.example.userservice.propertyowner.model.PropertyOwnerModel;
-import com.example.userservice.propertyowner.repo.PropertyOwnerRepo;
+import com.example.propertyservice.model.GenericResponse;
+import com.example.propertyservice.modules.propertyowner.model.PropertyOwnerModel;
+import com.example.propertyservice.modules.propertyowner.repo.PropertyOwnerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,18 +37,17 @@ public class PropertyOwnerService {
     }
 
     public GenericResponse updateOwner(PropertyOwnerModel updateOwner) {
-        Optional<PropertyOwnerModel> dto = repo.findById(updateOwner.getId());
+        Optional<PropertyOwnerModel> ownerExist = repo.findById(updateOwner.getId());
 
-        if (dto.isPresent()) {
-            PropertyOwnerModel owner = dto.get();
+        if (ownerExist.isPresent()) {
+            ownerExist = repo.findOwnerByEmailOrMobileNumber(updateOwner.getEmail(), updateOwner.getMobile_number());
 
-            if (owner.getEmail().equals(updateOwner.getEmail()) || owner.getMobile_number().equals(updateOwner.getMobile_number())) {
+            if (ownerExist.isPresent()) {
                 return new GenericResponse(false, "Email or mobile number already taken", 01, null);
             } else {
                 repo.save(updateOwner);
                 return new GenericResponse(true, "Update successful", 00, null);
             }
-
         } else {
             return new GenericResponse(false, "User does not exit", 01, null);
         }
