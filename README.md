@@ -1,5 +1,5 @@
 # rent-a-place
-Airbnb clone
+Airbnb backend clone
 
 In application.properties add url for your database
 
