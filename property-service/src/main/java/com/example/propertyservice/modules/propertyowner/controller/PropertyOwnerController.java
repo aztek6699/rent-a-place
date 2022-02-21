@@ -17,7 +17,7 @@ public class PropertyOwnerController {
     private PropertyOwnerService service;
 
     @GetMapping("")
-    public ResponseEntity<GenericResponse> getAllOwners() {
+    public ResponseEntity<GenericResponse> getAllPropertyOwners() {
 
         List<PropertyOwnerModel> list = service.getAllOwners();
         if (!list.isEmpty()) {

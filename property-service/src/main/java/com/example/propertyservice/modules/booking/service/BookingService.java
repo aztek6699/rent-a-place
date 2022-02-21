@@ -26,6 +26,17 @@ public class BookingService {
     @Autowired
     private RenterRepo renterRepo;
 
+    public GenericResponse getAllBookingsByPropertyId(Long propertyId) {
+
+        List<BookingModel> list = bookingRepo.findAllByPropertyId(propertyId);
+
+        if (list.isEmpty()) {
+            return new GenericResponse(false, "No bookings for property", 01, null);
+        } else {
+            return new GenericResponse(true, "Success", 00, list);
+        }
+    }
+
     public GenericResponse insertBooking(Long propertyId, Long renterId, BookingModel newBooking) {
 
         // check if property exists
