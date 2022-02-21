@@ -1,0 +1,346 @@
+{
+	"info": {
+		"_postman_id": "3b6d94e2-be60-49a4-a058-9edefa9fbff0",
+		"name": "rent_a_place",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "booking",
+			"item": [
+				{
+					"name": "get all booking for property",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/api/v1/booking/1/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"booking",
+								"1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insert booking",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"1\",\r\n    \"startDate\" : \"2000-01-01\",\r\n    \"endDate\" : \"2000-01-03\",\r\n    \"totalCost\" : \"99.99\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/v1/booking",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"booking"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "location",
+			"item": []
+		},
+		{
+			"name": "property",
+			"item": [
+				{
+					"name": "insert property",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"1\",\r\n    \"amenities\": \"meh\",\r\n    \"check_in_time\": \"01:00:00\",\r\n    \"check_out_time\": \"02:00:00\",\r\n    \"description\": \"this is a description, pretty nice\",\r\n    \"guest_capacity\": \"2\",\r\n    \"picture\": \"pic.jpeg\",\r\n    \"price\":\"11.11\",\r\n    \"type\": \"villa\",\r\n    \"property_owner_id\": \"1\",\r\n    \"location\": {\r\n        \"id\": \"1\",\r\n        \"address\": \"bharia\",\r\n        \"city\": \"isb\",\r\n        \"country\": \"pak\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/v1/property/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"property",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all properties",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/api/v1/property",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"property"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get property by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/api/v1/property/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"property",
+								"1"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "property owner",
+			"item": [
+				{
+					"name": "insert property owner",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"1\",\r\n    \"dob\": \"1994-02-19\",\r\n    \"email\": \"zain@mail.com\",\r\n    \"mobile_number\": \"03129716694\",\r\n    \"name\": \"Zain Haque\",\r\n    \"password\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/v1/propertyOwner",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"propertyOwner"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all property owners",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/api/v1/propertyOwner",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"propertyOwner"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get property owner by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/api/v1/propertyOwner/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"propertyOwner",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update property owner",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"1\",\r\n    \"dob\": \"1994-02-19\",\r\n    \"email\": \"abeq@mail.com\",\r\n    \"mobile_number\": \"03008551243\",\r\n    \"name\": \"Abeq\",\r\n    \"password\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/v1/propertyOwner",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"propertyOwner"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "renter",
+			"item": [
+				{
+					"name": "get all renters",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/api/v1/renter",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"renter"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get renter by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/api/v1/renter/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"renter",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insert renter",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"1\",\r\n    \"dob\": \"1994-06-11\",\r\n    \"email\": \"khizr@mail.com\",\r\n    \"mobile_number\": \"03129716694\",\r\n    \"name\": \"Khizr Shah\",\r\n    \"password\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/v1/renter",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"v1",
+								"renter"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
