@@ -28,7 +28,7 @@ public class PropertyModel {
     @JoinColumn(name = "property_owner_id", nullable = false)
     private PropertyOwnerModel propertyOwner;
 
-    @OneToOne(mappedBy = "property")
+    @OneToOne(mappedBy = "property", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private LocationModel location;
 

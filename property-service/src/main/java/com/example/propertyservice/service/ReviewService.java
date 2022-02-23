@@ -2,12 +2,14 @@ package com.example.propertyservice.service;
 
 import com.example.propertyservice.model.GenericResponse;
 import com.example.propertyservice.model.BookingModel;
+import com.example.propertyservice.model.PropertyModel;
 import com.example.propertyservice.repo.BookingRepo;
 import com.example.propertyservice.repo.PropertyRepo;
 import com.example.propertyservice.repo.RenterRepo;
 import com.example.propertyservice.model.ReviewModel;
 import com.example.propertyservice.repo.ReviewRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,14 +32,24 @@ public class ReviewService {
     @Autowired
     private RenterRepo renterRepo;
 
-    @PostMapping("/{id}")
-    public GenericResponse insertReview(@PathVariable Long id, @RequestBody ReviewModel newReview) {
+    public GenericResponse insertReview(Long bookingId, ReviewModel newReview) {
 
         // check if booking exist
-        Optional<BookingModel> booking = bookingRepo.findById(id);
+        Optional<BookingModel> booking = bookingRepo.findById(bookingId);
         if (booking.isEmpty()) return new GenericResponse(false, "Booking not found", 01, null);
 
-return null;
-    }
+        // check if booking already has review
+        if (booking.get().getReview() != null)
+            return new GenericResponse(false, "Booking already has review", 01, null);
 
+        // check if property exist
+        Optional<PropertyModel> property = propertyRepo.findById(booking.get().getProperty().getId());
+        if (property.isEmpty()) return new GenericResponse(false, "Property not found", 01, null);
+
+        // insert review
+        newReview.setBooking(booking.get());
+        newReview.setProperty(property.get());
+        reviewRepo.save(newReview);
+        return new GenericResponse(true, "Review inserted", 00, null);
+    }
 }

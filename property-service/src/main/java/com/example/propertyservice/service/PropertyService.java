@@ -63,8 +63,8 @@ public class PropertyService {
         // check if location with address exist
         if (locationRepo.findLocationByAddress(location.getAddress()).isPresent()) return new GenericResponse(false, "Address already exists", 01, null);
 
-        // insert property
-        // done to maintain the coherence of the object graph, id of location is the id of the property
+        // insert property, done to maintain the coherence of the object graph, id of location is the id of the property
+        newProperty.setPropertyOwner(propertyOwner.get());
         location.setProperty(newProperty);
         propertyRepo.save(newProperty);
         return new GenericResponse(true, "Property added", 00, null);

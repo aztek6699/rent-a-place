@@ -51,11 +51,10 @@ public class BookingService {
         Optional<RenterModel> renter = renterRepo.findById(renterId);
         if (renter.isEmpty()) return new GenericResponse(false, "renter does not exist", 01, null);
 
-        // check
+        // check if dates already taken
         List<BookingModel> bookingList = bookingRepo.findAllByPropertyId(propertyId);
 
         Date newStartDate = newBooking.getStartDate();
-
         for (BookingModel booking : bookingList) {
             if (newStartDate.after(booking.getStartDate()) && newStartDate.before(booking.getEndDate())) {
                 return new GenericResponse(false, "Dates already taken", 01, null);
