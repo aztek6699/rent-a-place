@@ -48,33 +48,25 @@ public class PropertyService {
     }
 
     public GenericResponse insertProperty(Long ownerId, PropertyModel newProperty) {
+
         // check if property owner exists
         Optional<PropertyOwnerModel> propertyOwner = propertyOwnerRepo.findById(ownerId);
+        if (propertyOwner.isEmpty()) return new GenericResponse(false, "Owner must not be null", 01, null);
 
-        if (propertyOwner.isPresent()) {
-            newProperty.setPropertyOwner(propertyOwner.get());
+        // check if check in time after check out time
+        if (!newProperty.getCheck_in_time().after(newProperty.getCheck_out_time())) return new GenericResponse(false, "Check in time must be after check out time", 01, null);
 
-            // check if check in time after check out time
-            if (!newProperty.getCheck_in_time().after(newProperty.getCheck_out_time()))
-                return new GenericResponse(false, "Check in time must be after check out time", 01, null);
+        // check if location is not null
+        LocationModel location = newProperty.getLocation();
+        if (location == null) return new GenericResponse(false, "Location must not be null", 01, null);
 
-            LocationModel location = newProperty.getLocation();
-            if (location != null) {
-                // check if address already exist
-                if (locationRepo.findLocationByAddress(location.getAddress()).isEmpty()) {
+        // check if location with address exist
+        if (locationRepo.findLocationByAddress(location.getAddress()).isPresent()) return new GenericResponse(false, "Address already exists", 01, null);
 
-                    // done to maintain the coherence of the object graph, id of location is the id of the property
-                    location.setProperty(newProperty);
-                    propertyRepo.save(newProperty);
-                    return new GenericResponse(true, "Property added", 00, null);
-                } else {
-                    return new GenericResponse(false, "Address already exists", 01, null);
-                }
-            } else {
-                return new GenericResponse(false, "Location must not be null", 01, null);
-            }
-        } else {
-            return new GenericResponse(false, "Owner must not be null", 01, null);
-        }
+        // insert property
+        // done to maintain the coherence of the object graph, id of location is the id of the property
+        location.setProperty(newProperty);
+        propertyRepo.save(newProperty);
+        return new GenericResponse(true, "Property added", 00, null);
     }
 }

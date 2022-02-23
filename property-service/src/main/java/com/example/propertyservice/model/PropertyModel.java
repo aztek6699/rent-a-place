@@ -21,6 +21,7 @@ import java.util.List;
 public class PropertyModel {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
