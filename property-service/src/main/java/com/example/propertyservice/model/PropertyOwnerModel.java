@@ -25,9 +25,7 @@ public class PropertyOwnerModel {
     @Id
     private Long id;
 
-    @JsonIgnore
     private String password;
-
     private String name;
     private String mobile_number;
     private String email;
