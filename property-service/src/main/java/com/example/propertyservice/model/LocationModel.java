@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "location")
@@ -15,7 +16,7 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class LocationModel {
+public class LocationModel implements Serializable {
 
     @Id
     @Column(name = "property_id")

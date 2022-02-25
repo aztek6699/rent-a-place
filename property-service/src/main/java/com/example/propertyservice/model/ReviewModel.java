@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "review")
@@ -14,7 +15,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @AllArgsConstructor
-public class ReviewModel {
+public class ReviewModel implements Serializable {
 
     @Id
     @Column(name = "booking_id")

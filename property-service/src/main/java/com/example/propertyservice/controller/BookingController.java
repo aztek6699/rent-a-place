@@ -19,8 +19,8 @@ public class BookingController {
         return ResponseEntity.ok(service.getAllBookingsByPropertyId(id));
     }
 
-    @PostMapping("/{propertyId}/{renterId}")
-    public ResponseEntity<GenericResponse> insertBooking(@PathVariable Long propertyId, @PathVariable Long renterId, @RequestBody BookingModel booking) {
+    @PostMapping("")
+    public ResponseEntity<GenericResponse> insertBooking(@RequestHeader Long propertyId, @RequestHeader Long renterId, @RequestBody BookingModel booking) {
         return ResponseEntity.ok(service.insertBooking(propertyId, renterId, booking));
     }
 }

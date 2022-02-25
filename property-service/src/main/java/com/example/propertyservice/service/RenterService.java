@@ -36,7 +36,7 @@ public class RenterService {
     }
 
     public GenericResponse findRenterByEmailOrNumber(String email, String mobileNumber) {
-        Optional<RenterModel> renter = repo.findOwnerByEmailOrMobileNumber(email, mobileNumber);
+        Optional<RenterModel> renter = repo.findRenterByEmailOrMobileNumber(email, mobileNumber);
 
         if (renter.isPresent()) {
             return new GenericResponse(true, "Renter found", 00, List.of(renter));
@@ -46,7 +46,7 @@ public class RenterService {
     }
 
     public GenericResponse insertRenter(RenterModel newRenter) {
-        Optional<RenterModel> renter = repo.findOwnerByEmailOrMobileNumber(newRenter.getEmail(), newRenter.getMobile_number());
+        Optional<RenterModel> renter = repo.findRenterByEmailOrMobileNumber(newRenter.getEmail(), newRenter.getMobile_number());
 
         if (renter.isEmpty()) {
             repo.save(newRenter);

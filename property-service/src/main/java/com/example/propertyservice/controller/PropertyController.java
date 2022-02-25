@@ -29,4 +29,8 @@ public class PropertyController {
         return ResponseEntity.ok(service.insertProperty(id, newProperty));
     }
 
+    @GetMapping("/evictAllCacheValues")
+    public String evictAllCacheValues() {
+        return service.evictAllCacheValues();
+    }
 }

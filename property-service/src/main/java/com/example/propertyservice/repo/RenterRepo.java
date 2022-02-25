@@ -11,5 +11,5 @@ import java.util.Optional;
 public interface RenterRepo extends JpaRepository<RenterModel, Long> {
 
     @Query(value = "SELECT * FROM renter WHERE email = :email || mobile_number = :mobileNumber", nativeQuery = true)
-    Optional<RenterModel> findOwnerByEmailOrMobileNumber(String email, String mobileNumber);
+    Optional<RenterModel> findRenterByEmailOrMobileNumber(String email, String mobileNumber);
 }

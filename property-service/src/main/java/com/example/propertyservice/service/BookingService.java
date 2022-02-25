@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +26,23 @@ public class BookingService {
 
     @Autowired
     private RenterRepo renterRepo;
+
+    // TODO complete it later
+    public GenericResponse getAllBookingsByRenterId(Long renterId) {
+
+        Optional<RenterModel> renter = renterRepo.findById(renterId);
+
+        if (renter.isEmpty()) return new GenericResponse(false, "Renter does not exist", 01, null);
+
+        // get list of bookings
+        //List<Long> renterIdList = bookingRepo.findAllByRenterId(renterId);
+
+        // check if renter has any bookings
+        //if (renterIdList.isEmpty()) return new GenericResponse(false, "Renter has no bookings", 01, null);
+
+        // get list of booking
+        return new GenericResponse(true, "fonund", 00, bookingRepo.findAllByRenterId(renterId));
+    }
 
     public GenericResponse getAllBookingsByPropertyId(Long propertyId) {
 
