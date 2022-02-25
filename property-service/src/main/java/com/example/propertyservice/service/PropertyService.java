@@ -58,16 +58,14 @@ public class PropertyService {
         Optional<PropertyModel> property;
         property = Optional.ofNullable(propertyHashOperations.get(propertyKey, id));
 
+        if (property.isPresent()) return new GenericResponse(true, "Property found", 00, List.of(property));
+
+        property = propertyRepo.findById(id);
         if (property.isPresent()) {
+            propertyHashOperations.put(propertyKey, id, property.get());
             return new GenericResponse(true, "Property found", 00, List.of(property));
         } else {
-            property = propertyRepo.findById(id);
-            if (property.isPresent()) {
-                propertyHashOperations.put(propertyKey, id, property.get());
-                return new GenericResponse(true, "Property found", 00, List.of(property));
-            } else {
-                return new GenericResponse(false, "Property not found", 01, null);
-            }
+            return new GenericResponse(false, "Property not found", 01, null);
         }
     }
 
@@ -93,6 +91,8 @@ public class PropertyService {
         newProperty.setPropertyOwner(propertyOwner.get());
         location.setProperty(newProperty);
         propertyRepo.save(newProperty);
+
+        // put new property in cache
         propertyHashOperations.put(propertyKey, newProperty.getId(), newProperty);
         return new GenericResponse(true, "Property added", 00, null);
     }
