@@ -1,7 +1,7 @@
 package com.example.propertyservice.controller;
 
-import com.example.propertyservice.model.GenericResponse;
 import com.example.propertyservice.model.BookingModel;
+import com.example.propertyservice.model.GenericResponse;
 import com.example.propertyservice.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

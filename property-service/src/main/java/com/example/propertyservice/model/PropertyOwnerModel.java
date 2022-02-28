@@ -1,6 +1,5 @@
 package com.example.propertyservice.model;
 
-import com.example.propertyservice.model.PropertyModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

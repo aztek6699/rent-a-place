@@ -1,17 +1,16 @@
 package com.example.propertyservice.service;
 
-import com.example.propertyservice.model.GenericResponse;
 import com.example.propertyservice.model.BookingModel;
-import com.example.propertyservice.repo.BookingRepo;
+import com.example.propertyservice.model.GenericResponse;
 import com.example.propertyservice.model.PropertyModel;
-import com.example.propertyservice.repo.PropertyRepo;
 import com.example.propertyservice.model.RenterModel;
+import com.example.propertyservice.repo.BookingRepo;
+import com.example.propertyservice.repo.PropertyRepo;
 import com.example.propertyservice.repo.RenterRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
