@@ -26,7 +26,7 @@ public class PropertyOwnerService {
 
     public GenericResponse insertOwner(PropertyOwnerModel newOwner) {
 
-        Optional<PropertyOwnerModel> owner = repo.findOwnerByEmailOrMobileNumber(newOwner.getEmail(), newOwner.getMobile_number());
+        Optional<PropertyOwnerModel> owner = repo.findByEmailOrMobileNumber(newOwner.getEmail(), newOwner.getMobileNumber());
 
         if (owner.isEmpty()) {
             repo.save(newOwner);
@@ -40,7 +40,7 @@ public class PropertyOwnerService {
         Optional<PropertyOwnerModel> ownerExist = repo.findById(updateOwner.getId());
 
         if (ownerExist.isPresent()) {
-            ownerExist = repo.findOwnerByEmailOrMobileNumber(updateOwner.getEmail(), updateOwner.getMobile_number());
+            ownerExist = repo.findByEmailOrMobileNumber(updateOwner.getEmail(), updateOwner.getMobileNumber());
 
             if (ownerExist.isPresent()) {
                 return new GenericResponse(false, "Email or mobile number already taken", 01, null);

@@ -24,7 +24,8 @@ public class RenterModel {
 
     private String password;
     private String name;
-    private String mobile_number;
+    @Column(name = "mobile_number")
+    private String mobileNumber;
     private String email;
     private Date dob;
 

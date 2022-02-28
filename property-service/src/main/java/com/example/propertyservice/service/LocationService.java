@@ -2,10 +2,13 @@ package com.example.propertyservice.service;
 
 import com.example.propertyservice.model.GenericResponse;
 import com.example.propertyservice.model.LocationModel;
-import com.example.propertyservice.repo.LocationRepo;
 import com.example.propertyservice.model.PropertyModel;
+import com.example.propertyservice.repo.LocationRepo;
 import com.example.propertyservice.repo.PropertyRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,11 +17,18 @@ import java.util.Optional;
 @Service
 public class LocationService {
 
-    @Autowired
-    private LocationRepo locationRepo;
+    private final LocationRepo locationRepo;
+    private final PropertyRepo propertyRepo;
+
+    // HashOperations<KEY, ID, TYPE>
+    private final HashOperations<String, Long, PropertyModel> propertyHashOperations;
 
     @Autowired
-    private PropertyRepo propertyRepo;
+    public LocationService(LocationRepo locationRepo, PropertyRepo propertyRepo, RedisTemplate<String, PropertyModel> redisTemplate) {
+        this.locationRepo = locationRepo;
+        this.propertyRepo = propertyRepo;
+        propertyHashOperations = redisTemplate.opsForHash();
+    }
 
     public GenericResponse insertLocation(LocationModel newLocation) {
         Optional<LocationModel> location = locationRepo.findLocationByAddress(newLocation.getAddress());
@@ -50,21 +60,17 @@ public class LocationService {
         }
     }
 
+    @CachePut(value = "property")
     public GenericResponse getLocationByCity(String city) {
-        List<Long> list = locationRepo.findLocationByCity(city);
+        List<PropertyModel> propertyList = propertyRepo.findAllByLocation_City(city);
 
-        if (list.isEmpty()) return new GenericResponse(false, "Locations by city not found", 01, null);
-
-        List<PropertyModel> propertyList = propertyRepo.findAllById(list);
         return new GenericResponse(true, "Locations found", 00, propertyList);
     }
 
+    @CachePut(value = "property")
     public GenericResponse getLocationByCountry(String country) {
-        List<Long> list = locationRepo.findLocationByCountry(country);
+        List<PropertyModel> propertyList = propertyRepo.findAllByLocation_Country(country);
 
-        if (list.isEmpty()) return new GenericResponse(false, "Locations by country not found", 01, null);
-
-        List<PropertyModel> propertyList = propertyRepo.findAllById(list);
         return new GenericResponse(true, "Locations found", 00, propertyList);
     }
 

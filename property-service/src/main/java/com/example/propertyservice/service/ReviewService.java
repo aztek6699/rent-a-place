@@ -1,19 +1,15 @@
 package com.example.propertyservice.service;
 
-import com.example.propertyservice.model.GenericResponse;
 import com.example.propertyservice.model.BookingModel;
+import com.example.propertyservice.model.GenericResponse;
 import com.example.propertyservice.model.PropertyModel;
+import com.example.propertyservice.model.ReviewModel;
 import com.example.propertyservice.repo.BookingRepo;
 import com.example.propertyservice.repo.PropertyRepo;
 import com.example.propertyservice.repo.RenterRepo;
-import com.example.propertyservice.model.ReviewModel;
 import com.example.propertyservice.repo.ReviewRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Optional;
 
@@ -45,6 +41,10 @@ public class ReviewService {
         // check if property exist
         Optional<PropertyModel> property = propertyRepo.findById(booking.get().getProperty().getId());
         if (property.isEmpty()) return new GenericResponse(false, "Property not found", 01, null);
+
+        // check if rating between 1 - 5
+        if (newReview.getRating() >= 1 && newReview.getRating() <= 5)
+            return new GenericResponse(false, "Rating must be between 1 -5", 01, null);
 
         // insert review
         newReview.setBooking(booking.get());

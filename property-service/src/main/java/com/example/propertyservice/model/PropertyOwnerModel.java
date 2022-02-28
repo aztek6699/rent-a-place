@@ -7,10 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
@@ -28,7 +25,8 @@ public class PropertyOwnerModel implements Serializable {
 
     private String password;
     private String name;
-    private String mobile_number;
+    @Column(name = "mobile_number")
+    private String mobileNumber;
     private String email;
     private Date dob;
 

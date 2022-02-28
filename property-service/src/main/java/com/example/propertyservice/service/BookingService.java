@@ -71,7 +71,6 @@ public class BookingService {
 
         // check if dates already taken
         List<BookingModel> bookingList = bookingRepo.findAllByPropertyId(propertyId);
-
         Date newStartDate = newBooking.getStartDate();
         for (BookingModel booking : bookingList) {
             if (newStartDate.after(booking.getStartDate()) && newStartDate.before(booking.getEndDate())) {
@@ -79,6 +78,7 @@ public class BookingService {
             }
         }
 
+        // insert booking
         newBooking.setProperty(property.get());
         newBooking.setRenter(renter.get());
 
